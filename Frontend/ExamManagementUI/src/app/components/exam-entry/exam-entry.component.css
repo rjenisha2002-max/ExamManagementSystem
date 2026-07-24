@@ -1,0 +1,238 @@
+/* Styles the main page heading text */                                     /* Explains purpose of this rule block */
+.page-title {
+  font-size: 24px;                                                          /* Sets the heading font size */
+  font-weight: 700;                                                         /* Makes the heading bold */
+  color: var(--color-text-dark);                                            /* Applies the dark base text color */
+  margin: 0 0 16px 0;                                                       /* Adds spacing below the heading */
+}
+
+/* Styles the reusable white content card used throughout the screen */      /* Explains purpose of this rule block */
+.card {
+  background-color: var(--color-card-bg);                                   /* Applies white card background */
+  border: 1px solid var(--color-border);                                    /* Adds a light border around the card */
+  border-radius: 8px;                                                       /* Rounds the card corners */
+  padding: 20px;                                                            /* Adds inner spacing within the card */
+  margin-bottom: 20px;                                                      /* Adds spacing below each card */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);                                 /* Adds a very subtle drop shadow */
+}
+
+.card-title {                                                               /* Styles the section title inside a card */
+  font-size: 18px;                                                          /* Sets the section title font size */
+  font-weight: 600;                                                         /* Makes the section title semi bold */
+  color: var(--color-text-dark);                                            /* Applies the dark base text color */
+  margin: 0 0 14px 0;                                                       /* Adds spacing below the section title */
+}
+
+/* Lays out form fields in a responsive horizontal row */                    /* Explains purpose of this rule block */
+.form-row {
+  display: flex;                                                            /* Lays out fields in a horizontal row */
+  gap: 16px;                                                                /* Adds spacing between form fields */
+  flex-wrap: wrap;                                                          /* Allows fields to wrap on small screens */
+  margin-bottom: 14px;                                                      /* Adds spacing below each form row */
+}
+
+.form-field {                                                               /* Styles an individual form field wrapper */
+  display: flex;                                                            /* Stacks label and input vertically */
+  flex-direction: column;                                                   /* Sets vertical stacking direction */
+  flex: 2;                                                                  /* Gives text fields more horizontal space */
+  min-width: 220px;                                                         /* Prevents fields from becoming too narrow */
+}
+
+.form-field--small {                                                       /* Modifier for narrower numeric fields */
+  flex: 1;                                                                  /* Gives numeric fields less horizontal space */
+  min-width: 140px;                                                         /* Sets a smaller minimum width */
+}
+
+.form-field--action {                                                      /* Modifier for the field holding the button */
+  justify-content: flex-end;                                                /* Aligns the button to the bottom of the row */
+  min-width: 160px;                                                         /* Sets a comfortable minimum width */
+}
+
+.form-label {                                                               /* Styles the label above each input */
+  font-size: 13px;                                                          /* Sets a small label font size */
+  font-weight: 600;                                                         /* Makes the label semi bold */
+  color: var(--color-text-muted);                                          /* Applies the muted secondary text color */
+  margin-bottom: 6px;                                                       /* Adds spacing below the label */
+}
+
+.form-input {                                                               /* Styles all text and number inputs */
+  padding: 9px 12px;                                                        /* Adds inner spacing within the input */
+  border: 1px solid var(--color-border);                                    /* Adds a light border around the input */
+  border-radius: 6px;                                                       /* Rounds the input corners */
+  font-size: 14px;                                                          /* Sets the input text font size */
+  color: var(--color-text-dark);                                            /* Applies the dark base text color */
+}
+
+.form-input:focus {                                                        /* Styles the input when focused */
+  outline: none;                                                            /* Removes the default browser outline */
+  border-color: var(--color-primary);                                      /* Highlights border with the primary color */
+}
+
+.form-hint {                                                                /* Styles the helper text below an input */
+  font-size: 12px;                                                          /* Sets a small helper text font size */
+  color: var(--color-text-muted);                                          /* Applies the muted secondary text color */
+  margin-top: 4px;                                                          /* Adds spacing above the helper text */
+}
+
+/* Styles the primary teal green action button */                           /* Explains purpose of this rule block */
+.btn--primary {
+  background-color: var(--color-primary);                                   /* Applies the teal green background color */
+  color: #ffffff;                                                           /* Sets the button text color to white */
+  border: none;                                                             /* Removes the default button border */
+  border-radius: 6px;                                                       /* Rounds the button corners */
+  padding: 10px 18px;                                                       /* Adds inner spacing within the button */
+  font-size: 14px;                                                          /* Sets the button text font size */
+  font-weight: 600;                                                         /* Makes the button text semi bold */
+}
+
+.btn--primary:hover {                                                      /* Styles the primary button hover state */
+  background-color: var(--color-primary-hover);                             /* Darkens background on hover */
+}
+
+.btn--primary:disabled {                                                   /* Styles the primary button disabled state */
+  opacity: 0.6;                                                             /* Fades the button when disabled */
+  cursor: not-allowed;                                                      /* Shows a not-allowed cursor when disabled */
+}
+
+.btn--save {                                                               /* Modifier adding spacing above save button */
+  margin-top: 16px;                                                         /* Adds spacing above the save button */
+}
+
+.btn--text {                                                               /* Styles the plain text remove link button */
+  background: none;                                                         /* Removes any background color */
+  border: none;                                                             /* Removes the default button border */
+  color: var(--color-badge-red);                                           /* Applies red color to signal removal */
+  font-size: 13px;                                                          /* Sets a small font size for the link */
+  font-weight: 600;                                                         /* Makes the link text semi bold */
+  padding: 0;                                                               /* Removes default button padding */
+}
+
+/* Styles alert banners used for error and success messages */              /* Explains purpose of this rule block */
+.alert {
+  padding: 12px 16px;                                                       /* Adds inner spacing within the alert */
+  border-radius: 6px;                                                       /* Rounds the alert corners */
+  margin-bottom: 16px;                                                      /* Adds spacing below the alert */
+  font-size: 14px;                                                          /* Sets the alert text font size */
+  font-weight: 500;                                                         /* Makes the alert text medium weight */
+}
+
+.alert--error {                                                            /* Modifier for the error alert variant */
+  background-color: #fdecea;                                               /* Applies a light red background color */
+  color: var(--color-badge-red);                                           /* Applies red text color for errors */
+  border: 1px solid #f5c2c0;                                               /* Adds a matching light red border */
+}
+
+.alert--success {                                                          /* Modifier for the success alert variant */
+  background-color: #e9f7ec;                                               /* Applies a light green background color */
+  color: var(--color-badge-green);                                         /* Applies green text color for success */
+  border: 1px solid #bfe6c6;                                               /* Adds a matching light green border */
+}
+
+.alert--info {                                                             /* Modifier for the edit mode info alert variant */
+  background-color: #eaf3f6;                                               /* Applies a light teal background color */
+  color: var(--color-primary);                                             /* Applies teal green text color */
+  border: 1px solid #c7dfe3;                                               /* Adds a matching light teal border */
+  display: flex;                                                           /* Lays out the message and cancel button in a row */
+  align-items: center;                                                     /* Vertically centers the banner content */
+  justify-content: space-between;                                          /* Pushes the cancel button to the right edge */
+  gap: 12px;                                                                /* Adds spacing between message and button */
+}
+
+.actions-cell {                                                            /* Styles the actions column in the results grid */
+  display: flex;                                                           /* Lays out edit and delete buttons in a row */
+  gap: 14px;                                                                /* Adds spacing between the action buttons */
+}
+
+.btn--danger {                                                             /* Modifier applying the red delete action color */
+  color: var(--color-badge-red);                                           /* Applies red text color for the delete link */
+}
+
+.btn--danger:disabled {                                                   /* Styles the delete button while disabled */
+  opacity: 0.6;                                                             /* Fades the button when disabled */
+  cursor: not-allowed;                                                      /* Shows a not-allowed cursor when disabled */
+}
+
+.btn--edit {                                                               /* Modifier applying the teal edit action color */
+  color: var(--color-primary);                                             /* Applies teal green text color for the edit link */
+}
+
+.btn--muted {                                                              /* Modifier applying a neutral cancel action color */
+  color: var(--color-text-muted);                                          /* Applies muted gray text color for cancel links */
+}
+
+/* Styles all data tables used across the screen */                         /* Explains purpose of this rule block */
+.data-table {
+  width: 100%;                                                              /* Makes the table fill its container width */
+  border-collapse: collapse;                                                /* Removes spacing between table cells */
+  font-size: 14px;                                                          /* Sets the table text font size */
+}
+
+.data-table thead tr {                                                     /* Styles the table header row */
+  background-color: var(--color-table-header-bg);                          /* Applies the light gray header background */
+}
+
+.data-table th {                                                           /* Styles individual table header cells */
+  text-align: left;                                                        /* Left aligns header text */
+  padding: 10px 12px;                                                       /* Adds inner spacing within header cells */
+  color: var(--color-text-muted);                                          /* Applies the muted secondary text color */
+  font-weight: 600;                                                         /* Makes header text semi bold */
+  border-bottom: 1px solid var(--color-border);                            /* Adds a border below the header row */
+}
+
+.data-table td {                                                           /* Styles individual table body cells */
+  padding: 10px 12px;                                                       /* Adds inner spacing within body cells */
+  border-bottom: 1px solid var(--color-border);                            /* Adds a border below each body row */
+  color: var(--color-text-dark);                                            /* Applies the dark base text color */
+}
+
+.empty-row {                                                               /* Styles the empty state placeholder cell */
+  text-align: center;                                                      /* Centers the empty state message */
+  color: var(--color-text-muted);                                          /* Applies the muted secondary text color */
+  padding: 20px;                                                            /* Adds generous inner spacing */
+}
+
+/* Styles the bar summarizing total mark and result badge */                /* Explains purpose of this rule block */
+.totals-bar {
+  display: flex;                                                            /* Lays out totals items in a row */
+  gap: 32px;                                                                /* Adds spacing between totals items */
+  margin-top: 16px;                                                         /* Adds spacing above the totals bar */
+  padding-top: 16px;                                                        /* Adds inner spacing above the content */
+  border-top: 1px solid var(--color-border);                                /* Adds a separator line above the bar */
+}
+
+.totals-bar__item {                                                        /* Styles an individual totals bar item */
+  display: flex;                                                            /* Stacks label and value vertically */
+  flex-direction: column;                                                   /* Sets vertical stacking direction */
+  gap: 4px;                                                                 /* Adds spacing between label and value */
+}
+
+.totals-bar__label {                                                       /* Styles the label text in totals bar */
+  font-size: 12px;                                                          /* Sets a small label font size */
+  color: var(--color-text-muted);                                          /* Applies the muted secondary text color */
+  text-transform: uppercase;                                                /* Displays the label in uppercase letters */
+  letter-spacing: 0.4px;                                                    /* Adds slight letter spacing for style */
+}
+
+.totals-bar__value {                                                       /* Styles the value text in totals bar */
+  font-size: 20px;                                                          /* Sets a larger value font size */
+  font-weight: 700;                                                         /* Makes the value text bold */
+  color: var(--color-text-dark);                                            /* Applies the dark base text color */
+}
+
+/* Styles the small colored status pill used for PASS and FAIL */           /* Explains purpose of this rule block */
+.badge {
+  display: inline-block;                                                    /* Allows padding on an inline element */
+  padding: 4px 12px;                                                        /* Adds inner spacing within the badge */
+  border-radius: 999px;                                                     /* Fully rounds the badge into a pill shape */
+  font-size: 12px;                                                          /* Sets a small badge font size */
+  font-weight: 700;                                                         /* Makes the badge text bold */
+  color: #ffffff;                                                           /* Sets the badge text color to white */
+}
+
+.badge--green {                                                            /* Modifier applying the green PASS color */
+  background-color: var(--color-badge-green);                              /* Applies the green badge background */
+}
+
+.badge--red {                                                              /* Modifier applying the red FAIL color */
+  background-color: var(--color-badge-red);                                /* Applies the red badge background */
+}

@@ -1,0 +1,45 @@
+/* ===================================================================== */
+/* Global Stylesheet - Color palette matched to InfinityCoderzz CMS ref  */
+/* ===================================================================== */
+
+:root {                                                                      /* Defines global CSS custom properties */
+  --color-header-bg: #0f4c4c;                                                /* Dark teal used for header and sidebar */
+  --color-sidebar-bg: #0d4344;                                               /* Slightly darker teal used for sidebar */
+  --color-primary: #1f7a6c;                                                  /* Teal green used for primary buttons */
+  --color-primary-hover: #185f54;                                            /* Darker teal green used on button hover */
+  --color-badge-teal: #17a2b8;                                               /* Teal badge color, Total records */
+  --color-badge-green: #28a745;                                              /* Green badge color, Pass / Completed */
+  --color-badge-amber: #f2a900;                                              /* Amber badge color, Pending */
+  --color-badge-red: #dc3545;                                                /* Red badge color, Fail / Cancelled */
+  --color-badge-dark: #2c3e50;                                               /* Dark badge color, Collection */
+  --color-badge-gray: #7f8c9a;                                               /* Gray badge color, Pending collection */
+  --color-page-bg: #f4f6f7;                                                  /* Light gray page background color */
+  --color-card-bg: #ffffff;                                                  /* White card and panel background color */
+  --color-border: #e2e8ea;                                                   /* Light border color used across cards */
+  --color-text-dark: #1f2d2e;                                                /* Primary dark text color */
+  --color-text-muted: #6b7b7c;                                               /* Muted secondary text color */
+  --color-table-header-bg: #eef2f3;                                          /* Light gray table header background */
+  --font-family-base: 'Segoe UI', Arial, sans-serif;                         /* Base font family used site wide */
+}
+
+* {                                                                          /* Universal selector resets box model */
+  box-sizing: border-box;                                                    /* Includes padding/border in element width */
+}
+
+html, body {                                                                 /* Root elements sizing */
+  height: 100%;                                                              /* Fills the full viewport height */
+  margin: 0;                                                                 /* Removes default browser margin */
+  padding: 0;                                                                /* Removes default browser padding */
+  font-family: var(--font-family-base);                                     /* Applies base font family */
+  background-color: var(--color-page-bg);                                   /* Applies light gray page background */
+  color: var(--color-text-dark);                                            /* Applies dark base text color */
+}
+
+button {                                                                     /* Base button reset */
+  font-family: inherit;                                                      /* Inherits the page font family */
+  cursor: pointer;                                                           /* Shows pointer cursor on hover */
+}
+
+input, select {                                                              /* Base form control reset */
+  font-family: inherit;                                                      /* Inherits the page font family */
+}

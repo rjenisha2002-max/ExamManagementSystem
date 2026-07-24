@@ -1,0 +1,188 @@
+<!-- Page heading for the exam result entry screen -->                       <!-- Explains purpose of heading block -->
+<h1 class="page-title">Exam Result Entry</h1>
+
+<!-- Banner shown while an existing saved record is being edited -->         <!-- Explains purpose of edit mode banner -->
+<div class="alert alert--info" *ngIf="editingMasterId !== null">
+  Editing saved exam #{{ editingMasterId }}.
+  <button class="btn btn--text btn--muted" (click)="cancelEdit()">Cancel Edit</button>
+</div>
+
+<!-- Alert banner shown when a validation or API error occurs -->            <!-- Explains purpose of error alert block -->
+<div class="alert alert--error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<!-- Alert banner shown after a successful save operation -->                <!-- Explains purpose of success alert block -->
+<div class="alert alert--success" *ngIf="successMessage">{{ successMessage }}</div>
+
+<!-- Card containing the student, year and subject entry form -->            <!-- Explains purpose of entry form card -->
+<section class="card">
+  <div class="form-row">                                                    <!-- Row holding student and year fields -->
+
+    <div class="form-field">                                                <!-- Field wrapper for student autofill -->
+      <label class="form-label">Student</label>                             <!-- Label for the student autofill input -->
+      <input
+        type="text"
+        class="form-input"
+        list="studentOptions"
+        placeholder="Type to search student"
+        [(ngModel)]="studentSearchText"
+        (ngModelChange)="onStudentTextChange()" />                          <!-- Binds text and resolves selection on type -->
+      <datalist id="studentOptions">                                        <!-- Native browser autofill data source -->
+        <option *ngFor="let s of students" [value]="s.studentName"></option> <!-- One option per student for autofill -->
+      </datalist>
+      <div class="form-hint" *ngIf="selectedStudent">{{ selectedStudent.mail }}</div> <!-- Shows selected student email -->
+    </div>
+
+    <div class="form-field form-field--small">                              <!-- Field wrapper for exam year -->
+      <label class="form-label">Exam Year</label>                           <!-- Label for the exam year input -->
+      <input
+        type="number"
+        class="form-input"
+        placeholder="e.g. 2026"
+        [(ngModel)]="examYear" />                                           <!-- Binds the entered exam year value -->
+    </div>
+
+  </div>
+
+  <div class="form-row">                                                    <!-- Row holding subject and marks fields -->
+
+    <div class="form-field">                                                <!-- Field wrapper for subject autofill -->
+      <label class="form-label">Subject</label>                             <!-- Label for the subject autofill input -->
+      <input
+        type="text"
+        class="form-input"
+        list="subjectOptions"
+        placeholder="Type to search subject"
+        [(ngModel)]="subjectSearchText"
+        (ngModelChange)="onSubjectTextChange()" />                          <!-- Binds text and resolves selection on type -->
+      <datalist id="subjectOptions">                                        <!-- Native browser autofill data source -->
+        <option *ngFor="let sub of subjects" [value]="sub.subjectName"></option> <!-- One option per subject for autofill -->
+      </datalist>
+    </div>
+
+    <div class="form-field form-field--small">                              <!-- Field wrapper for marks input -->
+      <label class="form-label">Marks</label>                               <!-- Label for the marks input -->
+      <input
+        type="number"
+        class="form-input"
+        min="0"
+        max="100"
+        placeholder="0-100"
+        [(ngModel)]="marksInput" />                                         <!-- Binds the entered marks value -->
+    </div>
+
+    <div class="form-field form-field--action">                             <!-- Field wrapper for the add button -->
+      <button class="btn btn--primary" (click)="addSubjectRow()">+ Add Subject</button> <!-- Adds the subject row -->
+    </div>
+
+  </div>
+</section>
+
+<!-- Card containing the added subjects table and totals -->                 <!-- Explains purpose of subjects table card -->
+<section class="card" *ngIf="examDtlsList.length > 0">
+  <table class="data-table">                                                 <!-- Table listing added subject marks -->
+    <thead>
+      <tr>
+        <th>Subject</th>                                                    <!-- Column header for subject name -->
+        <th>Marks</th>                                                      <!-- Column header for marks scored -->
+        <th></th>                                                           <!-- Column header for remove action -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of examDtlsList; let i = index">                  <!-- Repeats one row per added subject -->
+        <td>{{ row.subjectName }}</td>                                      <!-- Displays the subject name -->
+        <td>{{ row.marks }}</td>                                            <!-- Displays the marks scored -->
+        <td>
+          <button class="btn btn--text" (click)="removeSubjectRow(i)">Remove</button> <!-- Removes this row -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="totals-bar">                                                   <!-- Bar summarizing totals and status -->
+    <div class="totals-bar__item">
+      <span class="totals-bar__label">Total Mark</span>                     <!-- Label for the total mark value -->
+      <span class="totals-bar__value">{{ totalMark }}</span>                <!-- Displays the calculated total mark -->
+    </div>
+    <div class="totals-bar__item">
+      <span class="totals-bar__label">Result</span>                         <!-- Label for the pass or fail preview -->
+      <span class="badge" [ngClass]="passOrFailPreview === 'PASS' ? 'badge--green' : 'badge--red'">
+        {{ passOrFailPreview }}                                             <!-- Displays live PASS or FAIL preview -->
+      </span>
+    </div>
+  </div>
+
+  <button class="btn btn--primary btn--save" (click)="saveExam()" [disabled]="isSaving">
+    {{ isSaving ? (editingMasterId !== null ? 'Updating...' : 'Saving...') : (editingMasterId !== null ? 'Update Exam' : 'Save Exam') }} <!-- Toggles button label for save vs update -->
+  </button>
+  <button class="btn btn--text btn--muted btn--save" *ngIf="editingMasterId !== null" (click)="cancelEdit()">Cancel</button> <!-- Lets the user abandon the edit -->
+</section>
+
+<!-- Card showing the exam that was just saved, with confirmation details -->  <!-- Explains purpose of saved exam card -->
+<section class="card" *ngIf="savedExam">
+  <h2 class="card-title">Saved Exam Details</h2>                             <!-- Heading for the saved exam summary -->
+  <table class="data-table">                                                 <!-- Table summarizing the saved exam -->
+    <thead>
+      <tr>
+        <th>Student</th>                                                    <!-- Column header for student name -->
+        <th>Email</th>                                                      <!-- Column header for student email -->
+        <th>Exam Year</th>                                                  <!-- Column header for exam year -->
+        <th>Total Mark</th>                                                 <!-- Column header for total mark -->
+        <th>Status</th>                                                     <!-- Column header for pass or fail status -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ savedExam.studentName }}</td>                                <!-- Displays saved student name -->
+        <td>{{ savedExam.mail }}</td>                                       <!-- Displays saved student email -->
+        <td>{{ savedExam.examYear }}</td>                                   <!-- Displays saved exam year -->
+        <td>{{ savedExam.totalMark }}</td>                                  <!-- Displays saved total mark -->
+        <td>
+          <span class="badge" [ngClass]="savedExam.passOrFail === 'PASS' ? 'badge--green' : 'badge--red'">
+            {{ savedExam.passOrFail }}                                      <!-- Displays saved pass or fail status -->
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Card listing every previously saved exam record -->                     <!-- Explains purpose of results grid card -->
+<section class="card">
+  <h2 class="card-title">All Saved Exam Results ({{ allExamResults.length }})</h2> <!-- Heading with record count -->
+  <table class="data-table">                                                 <!-- Table listing all saved exam records -->
+    <thead>
+      <tr>
+        <th>Student</th>                                                    <!-- Column header for student name -->
+        <th>Email</th>                                                      <!-- Column header for student email -->
+        <th>Exam Year</th>                                                  <!-- Column header for exam year -->
+        <th>Total Mark</th>                                                 <!-- Column header for total mark -->
+        <th>Status</th>                                                     <!-- Column header for pass or fail status -->
+        <th>Saved On</th>                                                   <!-- Column header for creation timestamp -->
+        <th>Actions</th>                                                    <!-- Column header for edit and delete actions -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exam of allExamResults">                              <!-- Repeats one row per saved exam record -->
+        <td>{{ exam.studentName }}</td>                                     <!-- Displays student name -->
+        <td>{{ exam.mail }}</td>                                            <!-- Displays student email -->
+        <td>{{ exam.examYear }}</td>                                        <!-- Displays exam year -->
+        <td>{{ exam.totalMark }}</td>                                       <!-- Displays total mark -->
+        <td>
+          <span class="badge" [ngClass]="exam.passOrFail === 'PASS' ? 'badge--green' : 'badge--red'">
+            {{ exam.passOrFail }}                                           <!-- Displays pass or fail status -->
+          </span>
+        </td>
+        <td>{{ exam.createTime | date: 'dd-MM-yyyy HH:mm' }}</td>           <!-- Displays formatted creation timestamp -->
+        <td class="actions-cell">
+          <button class="btn btn--text btn--edit" (click)="startEditExam(exam)">Edit</button> <!-- Loads this record into the form for editing -->
+          <button class="btn btn--text btn--danger" (click)="deleteExam(exam)" [disabled]="isDeletingId === exam.masterId">
+            {{ isDeletingId === exam.masterId ? 'Deleting...' : 'Delete' }} <!-- Deletes this saved record, with in-progress label -->
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="allExamResults.length === 0">                              <!-- Shows placeholder row when list is empty -->
+        <td colspan="7" class="empty-row">No exam results saved yet.</td>   <!-- Displays empty state message -->
+      </tr>
+    </tbody>
+  </table>
+</section>

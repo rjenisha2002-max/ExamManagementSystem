@@ -1,0 +1,13 @@
+<!-- Top header bar styled with the same dark teal seen in the reference -->    <!-- Explains the purpose of the header block -->
+<header class="app-header">
+  <div class="app-header__brand">                                            <!-- Wraps the icon and title together -->
+    <img src="assets/logo-icon.svg" alt="ExamPro logo" class="app-header__logo" /> <!-- Displays the app logo icon -->
+    <span class="app-header__title">{{ title }}</span>                       <!-- Displays the bound application title -->
+  </div>
+  <div class="app-header__user">Exam Coordinator</div>      <!-- Displays a static logged in user label -->
+</header>
+
+<!-- Main content area that hosts the exam entry screen component -->        <!-- Explains the purpose of the main block -->
+<main class="app-content">
+  <app-exam-entry></app-exam-entry>                                          <!-- Renders the exam entry child component -->
+</main>

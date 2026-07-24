@@ -1,0 +1,35 @@
+/* Styles the top header bar with the same dark teal as the reference UI */   /* Explains purpose of this rule block */
+.app-header {
+  display: flex;                                                            /* Lays out children in a horizontal row */
+  align-items: center;                                                      /* Vertically centers header content */
+  justify-content: space-between;                                           /* Pushes brand and user to opposite ends */
+  background-color: var(--color-header-bg);                                 /* Applies the dark teal header background */
+  color: #ffffff;                                                           /* Sets header text color to white */
+  padding: 14px 24px;                                                       /* Adds vertical and horizontal spacing */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);                                 /* Adds a subtle shadow below the header */
+}
+
+.app-header__brand {                                                        /* Groups the icon and title elements */
+  display: flex;                                                            /* Lays out icon and title in a row */
+  align-items: center;                                                      /* Vertically centers icon and title */
+  gap: 10px;                                                                /* Adds spacing between icon and title */
+  font-size: 20px;                                                          /* Sets the brand text size */
+  font-weight: 600;                                                         /* Makes the brand text semi bold */
+}
+
+.app-header__logo {                                                         /* Styles the header logo image */
+  width: 30px;                                                              /* Sets the logo icon width */
+  height: 30px;                                                             /* Sets the logo icon height */
+  border-radius: 6px;                                                       /* Slightly rounds the logo corners */
+}
+
+.app-header__user {                                                         /* Styles the logged in user label */
+  font-size: 14px;                                                          /* Sets a smaller font size for the label */
+  opacity: 0.85;                                                            /* Slightly fades the label text */
+}
+
+.app-content {                                                              /* Styles the main content wrapper */
+  padding: 24px;                                                            /* Adds spacing around the main content */
+  max-width: 1200px;                                                        /* Constrains content to a readable width */
+  margin: 0 auto;                                                           /* Horizontally centers the content area */
+}

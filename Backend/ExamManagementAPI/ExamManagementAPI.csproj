@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">                                          <!-- Declares this project as an ASP.NET Core Web SDK project -->
+
+  <PropertyGroup>                                                            <!-- Group holding project wide settings -->
+    <TargetFramework>net8.0</TargetFramework>                                <!-- Targets the .NET 8 runtime -->
+    <Nullable>enable</Nullable>                                              <!-- Enables nullable reference type checking -->
+    <ImplicitUsings>enable</ImplicitUsings>                                  <!-- Enables implicit global using statements -->
+    <RootNamespace>ExamManagementAPI</RootNamespace>                         <!-- Sets the root namespace for the project -->
+  </PropertyGroup>
+
+  <ItemGroup>                                                                <!-- Group holding NuGet package references -->
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />  <!-- ADO.NET provider used for SQL Server access -->
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />    <!-- Adds Swagger UI for API testing -->
+  </ItemGroup>
+
+</Project>
